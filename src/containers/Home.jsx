@@ -1,16 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ProductList from '../components/Product/ProductList';
+import Hero from '../components/Layout/Hero/Hero';
+import CollectionSection from '../components/Product/CollectionSection';
+import HealthCheckupSection from '../components/Product/HealthCheckupSection';
+import Features from '../components/Product/Features';
 
 const Home = () => {
   return (
     <div>
-      <h1>Welcome to Pharmacy E-commerce Website</h1>
-      <p>Browse our products:</p>
+      <Hero />
+      <CollectionSection />
       <ProductList />
-      <p>
-        <Link to="/products">View all products</Link>
-      </p>
+      <HealthCheckupSection />
+      <Features />
     </div>
   );
 };

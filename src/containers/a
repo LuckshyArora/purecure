@@ -1,0 +1,64 @@
+import React, { Suspense, lazy } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+import Login from './containers/Login';
+import Register from './containers/Register';
+import PrescriptionMedicine from './components/Product/PrescriptionMedicine';
+import NonPrescriptionMedicine from './components/Product/NonPrescriptionMedicine';
+import NutritionalSupplements from './components/Product/NutritionalSupplements';
+import AyurvedicProducts from './components/Product/AyurvedicProducts';
+import PersonalCareProducts from './components/Product/PersonalCareProducts';
+import MedicalEquipment from './components/Product/MedicalEquipment';
+import HealthCheckup from './components/Product/HealthCheckup';
+
+// Lazy load the containers
+const Home = lazy(() => import('./containers/Home'));
+const ProductPage = lazy(() => import('./containers/ProductPage'));
+const Login = lazy(() => import('./containers/Login'));
+const Register = lazy(() => import('./containers/Register'));
+const OrderPage = lazy(() => import('./containers/OrderPage'));
+const AdminPage = lazy(() => import('./containers/AdminPage'));
+const SearchPage = lazy(() => import('./containers/SearchPage'));
+const PrescriptionMedicine = lazy(() => import('./components/Product/PrescriptionMedicine'));
+const NonPrescriptionMedicine = lazy(() => import('./components/Product/NonPrescriptionMedicine'));
+const NutritionalSupplements = lazy(() => import('./components/Product/NutritionalSupplements'));
+const AyurvedicProducts = lazy(() => import('./components/Product/AyurvedicProducts'));
+const PersonalCareProducts = lazy(() => import('./components/Product/PersonalCareProducts'));
+const MedicalEquipment = lazy(() => import('./components/Product/MedicalEquipment'));
+const HealthCheckup = lazy(() => import('./components/Product/HealthCheckup'));
+
+const AppRoutes = () => (
+  <Routes>
+    <Route path="/" element={<Home />} />
+    <Route path="/products" element={<ProductPage />} />
+    <Route  path="/login" element={<Login />} />
+    <Route  path="/register" element={<Register />} />
+    {/* <Route path="/cart" element={<CartPage />} /> */}
+    <Route path="/orders" element={<OrderPage />} />
+    <Route path="/admin" element={<AdminPage />} />
+    <Route path="/search" element={<SearchPage />} />
+    <Route path="/PrescriptionMedicine" element={<PrescriptionMedicine />} />
+    <Route path="/NonPrescriptionMedicine" element={<NonPrescriptionMedicine />} />
+    <Route path="/NutritionalSupplements" element={<NutritionalSupplements />} />
+    <Route path="/AyurvedicProducts" element={<AyurvedicProducts />} />
+    <Route path="/PersonalCareProducts" element={<PersonalCareProducts />} />
+    <Route path="/MedicalEquipment" element={<MedicalEquipment />} />
+    <Route path="/HealthCheckup" element={<HealthCheckup />} />
+  </Routes>
+);
+
+const App = () => {
+  return (
+    <BrowserRouter>
+      <Header />
+      {/* <Navbar /> */}
+      <Suspense fallback={<div>Loading...</div>}>
+        <AppRoutes />
+      </Suspense>
+      <Footer />
+    </BrowserRouter>
+  );
+};
+
+export default App;

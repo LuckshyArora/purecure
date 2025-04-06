@@ -33,10 +33,10 @@ const Footer = () => {
         <div className="">
           <h3 className="text-base text-gray-800 mb-1">Shop</h3>
           <ul className="space-y-1 text-gray-800 hover:text-gray-300">
-            {shopItems.map((item, index) => (
+            {shopItems.map(({name}, index) => (
               <li key={index}>
                 <Link to="#" className="hover:text-gray-500 text-sm transition-colors">
-                  {item}
+                  {name}
                 </Link>
               </li>
             ))}

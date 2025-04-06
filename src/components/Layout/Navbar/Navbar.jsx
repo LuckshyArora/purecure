@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { HiOutlineUser, HiOutlineShoppingBag, HiBars3BottomRight } from 'react-icons/hi2';
 import { IoMdClose } from 'react-icons/io';
 import SearchBar from '../SearchBar/SearchBar';
-import Cart from '../Cart/Cart';
+import CartDrawer from '../Cart/CartDrawer';
 import { navItems, shopItems } from '../../Data/navData';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import logo from '../../../assets/logo.png';
@@ -31,13 +31,13 @@ const NavBar = () => {
           {/* Navigation Links */}
           <div className=" md:flex space-x-6">
             {navItems.map((item, index) => (
-              item === "Shop" ? (
+              item.name === "Shop" ? (
                 <div key={index} className="relative group">
                   <button 
                     onClick={toggleShopDropdown}
                     className="flex items-center text-gray-700 hover:text-black text-sm font-medium uppercase"
                   >
-                    {item} 
+                    {item.name} 
                     <MdKeyboardArrowDown className="ml-1 text-lg text-gray-600 group-hover:text-black transition-transform duration-200 transform" 
                       style={{ transform: shopDropdownOpen ? "rotate(180deg)" : "rotate(0deg)" }} 
                     />
@@ -47,14 +47,14 @@ const NavBar = () => {
                   <div className={`absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-md z-50 
                     ${shopDropdownOpen ? "block" : "hidden"} group-hover:block`}
                   >
-                    {shopItems.map((shopItem, idx) => (
+                    {shopItems.map(({ name, lk }, idx) => (
                       <Link 
                         key={idx} 
-                        to="#" 
+                        to={lk}
                         className="block px-4 py-2 text-gray-700 hover:bg-gray-200 text-sm"
                         onClick={() => setShopDropdownOpen(false)}
                       >
-                        {shopItem}
+                        {name}
                       </Link>
                     ))}
                   </div>
@@ -62,10 +62,10 @@ const NavBar = () => {
               ) : (
                 <Link 
                   key={index} 
-                  to="#" 
+                  to={item.lk}
                   className="text-gray-700 hover:text-black text-sm font-medium uppercase"
                 >
-                  {item}
+                  {item.name}
                 </Link>
               )
             ))}
@@ -73,7 +73,7 @@ const NavBar = () => {
 
           {/* Icons & Search */}
           <div className="flex items-center space-x-4">
-            <Link to="/profile" className="hover:text-black">
+            <Link to="/login" className="hover:text-black">
               <HiOutlineUser className="h-6 w-6 text-gray-700" />
             </Link>
 
@@ -96,7 +96,7 @@ const NavBar = () => {
       </nav>
 
       {/* Cart Drawer */}
-      <Cart drawerOpen={drawerOpen} toggleCartDrawer={toggleCartDrawer} />
+      <CartDrawer drawerOpen={drawerOpen} toggleCartDrawer={toggleCartDrawer} />
 
       {/* Mobile Navigation Drawer */}
       <div className={`fixed top-0 left-0 w-3/4 sm:w-1/2 md:w-1/3 h-full bg-white shadow-lg transform transition-transform duration-300 z-50 ${
@@ -112,14 +112,14 @@ const NavBar = () => {
           <h2 className="text-xl font-semibold mb-4">Menu</h2>
           <nav className="space-y-4">
             {navItems.map((item, index) => (
-            <Link 
-              to="#" 
-              key={index} 
-              onClick={toggleNavDrawer} 
-              className="block text-gray-600 hover:text-black"
-            >
-            {item}
-            </Link>
+              <Link 
+                to={item.lk} 
+                key={index} 
+                onClick={toggleNavDrawer} 
+                className="block text-gray-600 hover:text-black"
+              >
+                {item.name}
+              </Link>
             ))}
           </nav>
         </div>
